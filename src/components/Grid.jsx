@@ -16,6 +16,23 @@ const gridNums = `
 `
 
 
+const example = `3 0 6 5 0 8 4 0 0
+5 2 0 0 0 0 0 0 0
+0 8 7 0 0 0 0 3 1
+0 0 3 0 1 0 0 8 0
+9 0 0 8 6 3 0 0 5
+0 5 0 0 9 0 6 0 0
+1 3 0 0 0 0 2 5 0
+0 0 0 0 0 0 0 7 4
+0 0 5 2 0 6 3 0 0`
+
+const placeholder = `
+Example Input (0 - empty cell):
+
+${example}
+`
+
+
 let next = []
 let colArr = []
 let rowArr = []
@@ -54,7 +71,6 @@ class Grid extends React.Component{
 
     checkAndPlay = () => {
         let input = this.state.input
-        console.log(input)
         if(input === null || input === undefined || input.length !== 9 || input.some(el => el.length !== 9)){
             alert('invalid input')
             return
@@ -71,14 +87,14 @@ class Grid extends React.Component{
                 rowArr[row].add(i)
                 subArr[subG[row][col]].add(i)
                 this.changeDisplay(row, col, i)
-                await sleep(25)
+                await sleep(10)
     
                 if(!await this.sudoku(index+1)){
                     colArr[col].delete(i)
                     rowArr[row].delete(i)
                     subArr[subG[row][col]].delete(i)
                     this.changeDisplay(row, col, '')
-                    await sleep(25)
+                    await sleep(10)
                 }
                 else return true
             }
@@ -86,15 +102,19 @@ class Grid extends React.Component{
         return false
     }
 
-    extractInput = (event) => {
-        let vals = makeMatrix(event.target.value)
-        console.log(vals)
+    extractInput = (val) => {
+        let vals = makeMatrix(val)
         if(vals.length === 9 && vals.every(el => el.length === 9)){
             this.setState({input: vals, matrix: vals})
         }
         else{
             this.setState(prev => ({...prev, input: vals}) )
         }
+    }
+
+    copyExample = () => {
+        document.getElementById('input').value = example
+        this.extractInput(example)
     }
 
     render(){
@@ -107,8 +127,9 @@ class Grid extends React.Component{
                         {this.createGrid()}
                     </div>
                     <div className={gridStyles.forms}>
-                        <textarea cols="30" rows="12" placeholder={placeholder.trim()} className={textStyle} onChange={this.extractInput}></textarea>
-                        <button onClick={() => this.checkAndPlay()} className={gridStyles["btn"]}>click</button>
+                        <textarea cols="30" rows="12" placeholder={placeholder.trim()} className={textStyle} onChange={(e) => this.extractInput(e.target.value)} id='input'></textarea>
+                        <button onClick={() => this.checkAndPlay()} className={gridStyles["btn"]}>Solve Sudoku</button>
+                        <button onClick={() => this.copyExample()} className={gridStyles["btn"]}>Copy Example</button>
                     </div>
                 </div>
             </>
@@ -163,17 +184,3 @@ function sleep(time){
         }, time)
     })
 }
-
-const placeholder = `
-Example Input (0 - empty cell):
-
-3 0 6 5 0 8 4 0 0
-5 2 0 0 0 0 0 0 0
-0 8 7 0 0 0 0 3 1
-0 0 3 0 1 0 0 8 0
-9 0 0 8 6 3 0 0 5
-0 5 0 0 9 0 6 0 0
-1 3 0 0 0 0 2 5 0
-0 0 0 0 0 0 0 7 4
-0 0 5 2 0 6 3 0 0
-`
