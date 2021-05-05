@@ -1,4 +1,6 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Sudoku Solver
+
+Sudoku Solver is an app that solves the sudoku for you. All you need to do is provide the input as required. It used the concept of recursion and backtracking to achieve the same.
 
 ## Available Scripts
 
