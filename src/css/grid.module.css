@@ -1,0 +1,68 @@
+.makeGrid{
+    display: grid;
+    grid: auto-flow / repeat(9, 70px);
+    grid-gap: 2px;
+    height: 550px !important;
+    color: white;
+    font-weight: 600;
+    font-size: 20px;
+    margin-right: 90px;
+}
+
+.makeGrid > div{
+    text-align: center;
+    display: grid;
+    place-items: center;
+}
+
+.bg-dark-gray{    
+    background-color: #333331;
+}
+
+.bg-gold{
+    background-color: #ebc715;
+}
+
+.text-gold{
+    color: #ebc715;
+}
+
+.text-center{
+    text-align: center;
+}
+
+.btn{
+    padding: 10px 30px;
+    border: 1px solid #ebc715;
+    font-size: 18px;
+    font-weight: 600;
+    background-color: transparent;
+    color: #ebc715;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.btn:active{
+    background-color: #ebc715;
+    color: #333331;
+    border: 1px solid #ebc715;
+}
+
+.textarea{
+    padding: 10px;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+}
+
+.forms > *{
+    display: block;
+}
+
+.forms{
+    max-width: 200px;
+}
